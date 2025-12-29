@@ -6,111 +6,124 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{
-  margin:0;
-  padding:20px;
-  font-family: Arial, sans-serif;
-  background:#e9f5e9;
-  text-transform: uppercase;
-}
-
-/* ===== HEADER ===== */
-.clock-bar{
-  display:flex;
-  justify-content:space-between;
-  max-width:180px;
-  margin:0 auto 12px auto;
-  padding:4px 12px;
-  border-radius:12px;
-  background:linear-gradient(90deg,#41e671,#176B39);
-  color:#fff;
-  font-size:11px;
-  font-weight:bold;
-  letter-spacing:1.2px;
-}
-
-.header{
-  text-align:center;
-  margin-bottom:22px;
-}
-
-.header h1{
-  margin:6px 0 4px 0;
-  font-size:1.8rem;
-  font-weight:900;
-  background:linear-gradient(145deg,#54e087,#2b7a2b);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-
-.header .sub{
-  font-size:13px;
-  color:#489167;
-  letter-spacing:.8px;
-}
-
-/* ===== MENU GRID ===== */
-.menu-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:16px;
-  max-width:420px;
-  margin:0 auto;
-}
-
-@media(min-width:768px){
-  .menu-grid{
-    grid-template-columns:repeat(3,1fr);
-    max-width:720px;
+  body{
+    margin:0;
+    padding:14px 14px 12px 14px;   /* compact */
+    font-family: Arial, sans-serif;
+    background:#e9f5e9;
+    text-transform: uppercase;
   }
-}
 
-/* ===== 3D TILE ===== */
-.menu-tile{
-  background:linear-gradient(145deg,#ffffff,#e3f3e6);
-  border-radius:16px;
-  padding:22px 12px;
-  text-align:center;
-  box-shadow:
-    0 6px 14px rgba(0,0,0,.12),
-    inset 0 1px 0 rgba(255,255,255,.7);
-  cursor:pointer;
-  transition:all .15s ease;
-}
+  /* ===== HEADER (COMPACT) ===== */
+  .clock-bar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    width:100%;
+    max-width:170px;              /* compact */
+    margin:0 auto 8px auto;       /* compact */
+    padding:3px 11px;             /* compact */
+    border-radius:11px;
+    background:linear-gradient(90deg,#41e671,#176B39);
+    color:#fff;
+    font-size:10px;               /* compact */
+    font-weight:bold;
+    letter-spacing:1.2px;
+    opacity:.92;
+    box-shadow:0 1px 4px 0 #bbdfbb70;
+  }
 
-.menu-tile:active{
-  transform:translateY(3px);
-  box-shadow:
-    0 3px 8px rgba(0,0,0,.18),
-    inset 0 1px 0 rgba(255,255,255,.5);
-}
+  .header{
+    text-align:center;
+    margin-bottom:14px;           /* compact */
+  }
+  .header h1{
+    margin:2px 0 3px 0;           /* compact */
+    font-size:1.65rem;            /* compact */
+    font-weight:900;
+    background:linear-gradient(145deg,#54e087,#2b7a2b);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  .header .sub{
+    font-size:12.5px;             /* compact */
+    color:#489167;
+    letter-spacing:.7px;
+    margin-bottom:6px;            /* compact */
+  }
 
-.menu-icon{
-  font-size:34px;
-  margin-bottom:10px;
-}
+  /* line pendek gradient (ikut index) */
+  .mini-line{
+    height:3px;
+    width:60px;
+    margin:0 auto 2px auto;
+    background:linear-gradient(90deg,#3bd97b 20%,#2b7a2b 80%);
+    border-radius:2px;
+  }
 
-.menu-title{
-  font-size:14px;
-  font-weight:900;
-  letter-spacing:1px;
-  color:#176B39;
-}
+  /* ===== MENU GRID (COMPACT) ===== */
+  .menu-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;                     /* compact */
+    max-width:390px;              /* compact */
+    margin:0 auto;
+  }
+  @media(min-width:768px){
+    .menu-grid{
+      grid-template-columns:repeat(3,1fr);
+      max-width:680px;
+      gap:14px;
+    }
+  }
 
-/* ===== FOOTER ===== */
-.footer{
-  margin-top:28px;
-  text-align:center;
-  font-size:10px;
-  letter-spacing:1.4px;
-  color:#7a7a7a;
-}
+  /* ===== 3D TILE (COMPACT) ===== */
+  .menu-tile{
+    background:linear-gradient(145deg,#ffffff,#e3f3e6);
+    border-radius:15px;
+    padding:16px 10px;            /* compact */
+    text-align:center;
+    box-shadow:
+      0 5px 12px rgba(0,0,0,.12),
+      inset 0 1px 0 rgba(255,255,255,.7);
+    cursor:pointer;
+    transition:all .14s ease;
+    user-select:none;
+  }
+  .menu-tile:active{
+    transform:translateY(3px);
+    box-shadow:
+      0 3px 8px rgba(0,0,0,.18),
+      inset 0 1px 0 rgba(255,255,255,.5);
+  }
+  .menu-icon{
+    font-size:30px;               /* compact */
+    margin-bottom:8px;
+    line-height:1;
+  }
+  .menu-title{
+    font-size:13px;               /* compact */
+    font-weight:900;
+    letter-spacing:1px;
+    color:#176B39;
+    line-height:1.15;
+  }
+
+  /* ===== FOOTER (COMPACT) ===== */
+  .footer{
+    margin-top:16px;              /* compact */
+    text-align:center;
+    font-size:10px;
+    letter-spacing:1.4px;
+    color:#7a7a7a;
+    font-weight:bold;
+  }
 </style>
 </head>
 
 <body>
 
-<!-- CLOCK -->
+<!-- CLOCK (STATIK: set sekali sahaja) -->
 <div class="clock-bar">
   <span id="date"></span>
   <span id="time"></span>
@@ -120,32 +133,33 @@ body{
 <div class="header">
   <h1>SECURE ENTRY</h1>
   <div class="sub">REGISTER.ACCESS.SECURE</div>
+  <div class="mini-line"></div>
 </div>
 
 <!-- MENU -->
 <div class="menu-grid">
 
-  <div class="menu-tile">
+  <div class="menu-tile" data-go="delivery">
     <div class="menu-icon">📦</div>
     <div class="menu-title">Courier / Delivery</div>
   </div>
 
-  <div class="menu-tile">
+  <div class="menu-tile" data-go="tech">
     <div class="menu-icon">🛠️</div>
     <div class="menu-title">Technician / Vendor</div>
   </div>
 
-  <div class="menu-tile">
+  <div class="menu-tile" data-go="resident">
     <div class="menu-icon">🏠</div>
     <div class="menu-title">Owner / Tenant</div>
   </div>
 
-  <div class="menu-tile">
+  <div class="menu-tile" data-go="lobby">
     <div class="menu-icon">🧍‍♂️</div>
     <div class="menu-title">Lobby Assist</div>
   </div>
 
-  <div class="menu-tile">
+  <div class="menu-tile" data-go="facility">
     <div class="menu-icon">🏊‍♂️</div>
     <div class="menu-title">Facility</div>
   </div>
@@ -153,21 +167,16 @@ body{
 </div>
 
 <!-- FOOTER -->
-<div class="footer">
-  POWERED BY MRED TECH
-</div>
+<div class="footer">POWERED BY MRED TECH</div>
 
 <script>
-function pad(n){return n<10?'0'+n:n;}
-function updateClock(){
-  const d=new Date();
-  document.getElementById('date').textContent=
+  // Statik: set sekali sahaja (tak update setiap saat)
+  function pad(n){return n<10?'0'+n:n;}
+  const d = new Date();
+  document.getElementById('date').textContent =
     pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear();
-  document.getElementById('time').textContent=
-    pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
-}
-setInterval(updateClock,1000);
-updateClock();
+  document.getElementById('time').textContent =
+    pad(d.getHours())+':'+pad(d.getMinutes());
 </script>
 
 </body>
