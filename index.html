@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SECURE ENTRY</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  body{
+    margin:0;
+    padding:20px;
+    font-family: Arial, sans-serif;
+    background:#e9f5e9;
+    text-transform: uppercase;
+  }
+
+  /* ===== HEADER ===== */
+  .clock-bar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    width:100%;
+    max-width:180px;
+    margin:0 auto 10px auto;
+    padding:4px 12px;
+    border-radius:12px;
+    background:linear-gradient(90deg,#41e671 0%, #176B39 100%);
+    color:#fff;
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:1.2px;
+    opacity:.95;
+    box-shadow:0 1px 4px rgba(0,0,0,.08);
+  }
+
+  .header{
+    text-align:center;
+    margin-bottom:18px;
+  }
+
+  .header h1{
+    margin:6px 0 4px 0;
+    font-size:1.8rem;
+    font-weight:900;
+    background:linear-gradient(145deg,#54e087,#2b7a2b);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+
+  .header .sub{
+    font-size:13px;
+    color:#489167;
+    letter-spacing:.8px;
+    margin-bottom:6px;
+  }
+
+  /* line pendek gradient bawah tagline (rujuk style Secure Entry) */
+  .mini-line{
+    height:3px;
+    width:64px;
+    margin:0 auto;
+    background:linear-gradient(90deg,#41e671 0%, #176B39 100%);
+    border-radius:2px;
+  }
+
+  /* ===== MENU GRID ===== */
+  #landingMenu{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+    max-width:420px;
+    margin:0 auto;
+  }
+
+  @media(min-width:768px){
+    #landingMenu{
+      grid-template-columns:repeat(3,1fr);
+      max-width:720px;
+    }
+  }
+
+  /* ===== 3D TILE ===== */
+  .menu-tile{
+    background:linear-gradient(145deg,#ffffff,#e3f3e6);
+    border-radius:16px;
+    padding:22px 12px;
+    text-align:center;
+    box-shadow:
+      0 6px 14px rgba(0,0,0,.12),
+      inset 0 1px 0 rgba(255,255,255,.7);
+    cursor:pointer;
+    transition:all .15s ease;
+    user-select:none;
+  }
+
+  .menu-tile:active{
+    transform:translateY(3px);
+    box-shadow:
+      0 3px 8px rgba(0,0,0,.18),
+      inset 0 1px 0 rgba(255,255,255,.5);
+  }
+
+  .menu-icon{ font-size:34px; margin-bottom:10px; line-height:1; }
+  .menu-title{ font-size:14px; font-weight:900; letter-spacing:1px; color:#176B39; }
+
+  /* ===== MODULE BAR (HOME + CHIP) ===== */
+  #moduleBar{
+    display:none;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    max-width:720px;
+    margin:0 auto 12px auto;
+  }
+
+  .btn-3d{
+    border:none;
+    border-radius:14px;
+    padding:12px 16px;
+    font-weight:900;
+    letter-spacing:1px;
+    background:linear-gradient(145deg,#41e671,#176B39);
+    color:#fff;
+    box-shadow:0 6px 14px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.35);
+    cursor:pointer;
+    user-select:none;
+  }
+  .btn-3d:active{
+    transform:translateY(2px);
+    box-shadow:0 3px 8px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.25);
+  }
+
+  .module-chip{
+    flex:1;
+    text-align:center;
+    border-radius:14px;
+    padding:12px 10px;
+    font-weight:900;
+    letter-spacing:1px;
+    color:#176B39;
+    background:linear-gradient(145deg,#ffffff,#e3f3e6);
+    box-shadow:0 6px 14px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.65);
+  }
+
+  /* ===== IFRAME WRAP (FORM INSIDE MENU) ===== */
+  #moduleWrap{
+    display:none;
+    max-width:720px;
+    margin:0 auto;
+    border-radius:16px;
+    overflow:hidden;
+    background:#ffffff;
+    box-shadow:0 10px 22px rgba(0,0,0,.12);
+  }
+
+  /* High enough for phone; grows with viewport */
+  #moduleFrame{
+    width:100%;
+    height:72vh;
+    border:0;
+    background:#fff;
+  }
+
+  @media(min-width:768px){
+    #moduleFrame{ height:76vh; }
+  }
+
+  /* ===== FOOTER ===== */
+  .footer{
+    margin-top:16px;
+    text-align:center;
+    font-size:10px;
+    letter-spacing:1.4px;
+    color:#7a7a7a;
+    font-weight:bold;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- CLOCK -->
+<div class="clock-bar">
+  <span id="date"></span>
+  <span id="time"></span>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>SECURE ENTRY</h1>
+  <div class="sub">REGISTER.ACCESS.SECURE</div>
+  <div class="mini-line"></div>
+</div>
+
+<!-- MENU -->
+<div id="landingMenu">
+  <div class="menu-tile" id="tileCourier">
+    <div class="menu-icon">📦</div>
+    <div class="menu-title">Courier / Delivery</div>
+  </div>
+
+  <div class="menu-tile" id="tileTech">
+    <div class="menu-icon">🛠️</div>
+    <div class="menu-title">Technician / Vendor</div>
+  </div>
+
+  <div class="menu-tile" id="tileResident">
+    <div class="menu-icon">🏠</div>
+    <div class="menu-title">Owner / Tenant</div>
+  </div>
+
+  <div class="menu-tile" id="tileLobby">
+    <div class="menu-icon">🧍‍♂️</div>
+    <div class="menu-title">Lobby Assist</div>
+  </div>
+
+  <div class="menu-tile" id="tileFacility">
+    <div class="menu-icon">🏊‍♂️</div>
+    <div class="menu-title">Facility</div>
+  </div>
+</div>
+
+<!-- MODULE BAR -->
+<div id="moduleBar">
+  <button type="button" id="homeBtn" class="btn-3d">HOME</button>
+  <div id="moduleChip" class="module-chip">MODULE</div>
+</div>
+
+<!-- MODULE CONTENT: FORM INSIDE MENU (IFRAME) -->
+<div id="moduleWrap">
+  <iframe id="moduleFrame" src="about:blank" title="Secure Entry Module"></iframe>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">POWERED BY MRED TECH</div>
+
+<script>
+  // ===== Clock =====
+  function pad(n){ return n<10 ? '0'+n : n; }
+  function updateClock(){
+    const d=new Date();
+    document.getElementById('date').textContent =
+      pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear();
+    document.getElementById('time').textContent =
+      pad(d.getHours())+':'+pad(d.getMinutes());
+  }
+  updateClock();
+
+  // ===== Module switching =====
+  const landingMenu = document.getElementById('landingMenu');
+  const moduleBar   = document.getElementById('moduleBar');
+  const moduleChip  = document.getElementById('moduleChip');
+  const moduleWrap  = document.getElementById('moduleWrap');
+  const moduleFrame = document.getElementById('moduleFrame');
+
+  function showModule(label, src){
+    if (moduleChip) moduleChip.textContent = label;
+    if (landingMenu) landingMenu.style.display = 'none';
+    if (moduleBar) moduleBar.style.display = 'flex';
+    if (moduleWrap) moduleWrap.style.display = 'block';
+    if (moduleFrame) moduleFrame.src = src;
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  function backToMenu(){
+    if (moduleFrame) moduleFrame.src = 'about:blank';
+    if (moduleWrap)  moduleWrap.style.display = 'none';
+    if (moduleBar)   moduleBar.style.display = 'none';
+    if (landingMenu) landingMenu.style.display = 'grid';
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  // ===== Click handlers =====
+  document.getElementById('homeBtn')?.addEventListener('click', backToMenu);
+
+  // Courier/Delivery -> open index_secure_entry and start at search record (hash)
+  document.getElementById('tileCourier')?.addEventListener('click', ()=>{
+    showModule('COURIER / DELIVERY', 'index_secure_entry.html#search');
+  });
+
+  // Technician/Vendor -> use same base form for now (content later), start at search
+  document.getElementById('tileTech')?.addEventListener('click', ()=>{
+    showModule('TECHNICIAN / VENDOR', 'index_secure_entry.html#search');
+  });
+
+  // Owner/Tenant -> use same base form for now (content later), start at search
+  document.getElementById('tileResident')?.addEventListener('click', ()=>{
+    showModule('OWNER / TENANT', 'index_secure_entry.html#search');
+  });
+
+  // Planned modules (for now)
+  function planned(label){
+    alert(label + " MODULE IN PLANNING");
+  }
+  document.getElementById('tileLobby')?.addEventListener('click', ()=> planned('LOBBY ASSIST'));
+  document.getElementById('tileFacility')?.addEventListener('click', ()=> planned('FACILITY'));
+</script>
+
+</body>
+</html>
