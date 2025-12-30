@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SECURE ENTRY</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+/* ===== FIXED LANDING HEADER (STAY ON TOP) ===== */
+.landing-fixed-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #e9f5e9;
+  z-index: 9999;
+  padding: 20px 20px 10px 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+/* Content area sits below fixed header */
+.page-content{
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 14px 20px 20px 20px;
+}
+
+/* Reserve space so content won't be covered */
+body{
+  padding-top: 190px !important;
+}
+
+/* Top action row (HOME + current menu) */
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  max-width: 720px;
+  margin: 0 auto 10px auto;
+  padding: 0 2px;
+}
+
+.topbar-title{
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  color: #176B39;
+}
+
+.topbar-btn{
+  border:none;
+  border-radius: 18px;
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  color:#fff;
+  background: linear-gradient(145deg,#41e671,#176B39);
+  box-shadow: 0 2px 6px rgba(0,0,0,.18);
+  cursor:pointer;
+  user-select:none;
+  display:none; /* shown only when a menu is opened */
+}
+
+.topbar-btn:active{
+  transform: translateY(2px);
+}
+
+/* IFRAME CONTENT VIEW */
+.content-frame{
+  width: 100%;
+  height: calc(100vh - 260px);
+  border: 0;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+  display:none; /* hidden until menu opened */
+}
+
+
+/* ===== BASE ===== */
+body{
+  margin:0;
+  padding:20px;
+  font-family: Arial, sans-serif;
+  background:#e9f5e9;
+  text-transform: uppercase;
+}
+
+/* ===== CLOCK BAR (EXACT FORM MATCH) ===== */
+.clock-bar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  width:100%;
+  max-width:180px;
+  margin:0 auto 13px auto;
+  padding:2.5px 12px;
+  border-radius:11px;
+  background:linear-gradient(90deg,#41e671 0%, #176B39 100%);
+  box-shadow:0 1px 4px 0 #bbdfbb70;
+  font-size:11px;
+  color:#fff;
+  letter-spacing:1.4px;
+  font-family: Arial, sans-serif;
+  font-weight:bold;
+  opacity:0.90;
+}
+
+/* ===== HEADER ===== */
+.header{
+  text-align:center;
+  margin-bottom:22px;
+}
+
+.header h1{
+  margin:6px 0 4px 0;
+  font-size:26px;
+  font-weight:900;
+  letter-spacing:1.3px;
+  background:linear-gradient(145deg,#54e087 0%, #2b7a2b 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.header .sub{
+  font-size:12px;
+  color:#489167;
+  letter-spacing:.8px;
+  margin-bottom:6px;
+}
+
+/* ===== LINE GRADIENT (SAME AS FORM) ===== */
+.header-line{
+  height:3px;
+  width:60px;
+  margin:0 auto 6px auto;
+  background:linear-gradient(90deg,#3bd97b 20%, #2b7a2b 80%);
+  border-radius:2px;
+}
+
+/* ===== MENU GRID ===== */
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+  max-width:420px;
+  margin:0 auto;
+}
+
+@media(min-width:768px){
+  .menu-grid{
+    grid-template-columns:repeat(3,1fr);
+    max-width:720px;
+  }
+}
+
+/* ===== MENU TILE (3D – SAME FEEL) ===== */
+.menu-tile{
+  background:linear-gradient(145deg,#ffffff,#e3f3e6);
+  border-radius:16px;
+  padding:22px 12px;
+  text-align:center;
+  box-shadow:
+    0 6px 14px rgba(0,0,0,.12),
+    inset 0 1px 0 rgba(255,255,255,.7);
+  cursor:pointer;
+  transition:all .15s ease;
+  user-select:none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.menu-tile:active{
+  transform:translateY(3px);
+  box-shadow:
+    0 3px 8px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.5);
+}
+
+.menu-icon{
+  font-size:34px;
+  margin-bottom:10px;
+}
+
+.menu-title{
+  font-size:14px;
+  font-weight:900;
+  letter-spacing:1px;
+  color:#176B39;
+}
+
+/* ===== FOOTER ===== */
+.footer{
+  margin-top:28px;
+  text-align:center;
+  font-size:10px;
+  letter-spacing:1.4px;
+  color:#888888;
+  font-weight:bold;
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="landing-fixed-header">
+<!-- CLOCK -->
+<div class="clock-bar">
+  <span id="date"></span>
+  <span id="time"></span>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>SECURE ENTRY</h1>
+  <div class="sub">REGISTER.ACCESS.SECURE</div>
+  <div class="header-line"></div>
+</div>
+
+
+  <div class="topbar">
+    <div class="topbar-title" id="currentMenuLabel">MENU</div>
+    <button class="topbar-btn" id="homeBtn" type="button" onclick="showMenu()">HOME</button>
+  </div>
+</div>
+
+<div class="page-content">
+  <div id="menuView">
+<div class="menu-grid">
+
+  <div class="menu-tile"
+    onclick="openMenu('GUARD HOUSE', 'https://mredtech.github.io/repository-test/')">
+    <div class="menu-icon">🚧</div>
+    <div class="menu-title">Guard House</div>
+  </div>
+
+  <div class="menu-tile">
+    <div class="menu-icon">🧑‍🔧</div>
+    <div class="menu-title">Technician / Vendor</div>
+  </div>
+
+  <div class="menu-tile">
+    <div class="menu-icon">🧍‍♂️</div>
+    <div class="menu-title">Lobby</div>
+  </div>
+
+  <div class="menu-tile">
+    <div class="menu-icon">🏊‍♂️</div>
+    <div class="menu-title">Facility</div>
+  </div>
+
+</div>
+  </div>
+
+  <iframe id="contentFrame" class="content-frame" loading="lazy" referrerpolicy="no-referrer"></iframe>
+
+  <div class="footer">
+    POWERED BY MRED TECH
+  </div>
+</div>
+
+
+<script>
+function openMenu(title, url){
+  const menuView = document.getElementById('menuView');
+  const frame = document.getElementById('contentFrame');
+  const label = document.getElementById('currentMenuLabel');
+  const homeBtn = document.getElementById('homeBtn');
+
+  if (label) label.textContent = title || 'MENU';
+  if (homeBtn) homeBtn.style.display = 'inline-block';
+
+  if (menuView) menuView.style.display = 'none';
+  if (frame){
+    frame.style.display = 'block';
+    frame.src = url;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function showMenu(){
+  const menuView = document.getElementById('menuView');
+  const frame = document.getElementById('contentFrame');
+  const label = document.getElementById('currentMenuLabel');
+  const homeBtn = document.getElementById('homeBtn');
+
+  if (label) label.textContent = 'MENU';
+  if (homeBtn) homeBtn.style.display = 'none';
+
+  if (frame){
+    frame.src = 'about:blank';
+    frame.style.display = 'none';
+  }
+  if (menuView) menuView.style.display = 'block';
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+<script>
+function pad(n){return n<10?'0'+n:n;}
+function updateClock(){
+  const d=new Date();
+  document.getElementById('date').textContent=
+    pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear();
+  document.getElementById('time').textContent=
+    pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
+}
+setInterval(updateClock,1000);
+updateClock();
+</script>
+
+</body>
+</html>
