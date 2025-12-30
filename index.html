@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SECURE ENTRY - LANDING</title>
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background-color:#e9f5e9;
+      padding:20px;
+      text-transform:uppercase;
+    }
+    .clock-bar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      width:100%;
+      max-width:180px;
+      margin:0 auto 13px auto;
+      padding:2.5px 12px;
+      border-radius:11px;
+      background:linear-gradient(90deg,#41e671 0%,#176B39 100%);
+      box-shadow:0 1px 4px 0 #bbdfbb70;
+      font-size:11px;
+      color:#fff;
+      letter-spacing:1.4px;
+      font-weight:bold;
+      opacity:.90;
+      position:relative;
+      z-index:10;
+    }
+    .clock-date,.clock-time{font-size:11px;}
+    .header-gradient{
+      background:linear-gradient(145deg,#54e087 0%,#2b7a2b 100%);
+      font-weight:900;
+      font-size:1.8rem;
+      letter-spacing:1.3px;
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .container{
+      max-width:520px;
+      margin:0 auto;
+    }
+
+    .menu-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .menu-card{
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      width:100%;
+      padding:14px 16px;
+      border-radius:14px;
+      background:linear-gradient(135deg,#ffffff 0%,#f6fff6 60%,#e5ffe9 100%);
+      border:1px solid #cfe8cf;
+      box-shadow:0 10px 18px #176b3918, 0 2px 6px #00000010;
+      cursor:pointer;
+      user-select:none;
+      transition:transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+      text-decoration:none;
+      color:#176B39;
+      box-sizing:border-box;
+    }
+    .menu-card:active{
+      transform:translateY(2px);
+      box-shadow:0 6px 14px #176b3914, 0 1px 4px #0000000f;
+    }
+    .menu-left{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+    }
+    .menu-icon{
+      width:44px;
+      height:44px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-weight:900;
+      letter-spacing:1px;
+      background:linear-gradient(145deg,#3bd97b 0%,#2b7a2b 100%);
+      box-shadow:0 6px 14px #176b3920;
+      flex:0 0 auto;
+    }
+    .menu-title{
+      font-size:14px;
+      font-weight:900;
+      letter-spacing:1.2px;
+      line-height:1.15;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .menu-sub{
+      font-size:11px;
+      font-weight:bold;
+      letter-spacing:.9px;
+      color:#489167;
+      margin-top:2px;
+    }
+    .menu-arrow{
+      font-size:18px;
+      font-weight:900;
+      color:#2b7a2b;
+      flex:0 0 auto;
+    }
+    .badge{
+      position:absolute;
+      top:10px;
+      right:12px;
+      font-size:10px;
+      font-weight:900;
+      letter-spacing:1.2px;
+      padding:4px 8px;
+      border-radius:999px;
+      background:linear-gradient(135deg,#f2f2f2 0%,#e7e7e7 60%,#dcdcdc 100%);
+      color:#2f2f2f;
+      box-shadow:0 6px 12px #00000010;
+    }
+    .disabled{
+      opacity:.75;
+      cursor:not-allowed;
+    }
+    .disabled .menu-arrow{opacity:.7;}
+    .footer{
+      text-align:center;
+      padding:5px;
+      font-size:10px;
+      color:#888888;
+      margin-top:22px;
+      font-weight:bold;
+      letter-spacing:1px;
+    }
+
+    /* Tablet: 2 column */
+    @media (min-width: 720px){
+      .menu-grid{grid-template-columns:1fr 1fr;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="clock-bar">
+      <span id="liveDateOnly" class="clock-date"></span>
+      <span id="liveTimeOnly" class="clock-time"></span>
+    </div>
+
+    <div style="text-align:center;margin-bottom:8px;">
+      <h2 class="header-gradient" style="margin-bottom:0.18em;">SECURE ENTRY</h2>
+      <div style="color:#489167;font-size:13px;letter-spacing:0.6px;margin-bottom:6px;">
+        REGISTER.ACCESS.SECURE
+      </div>
+      <div style="height:3px;width:60px;margin:0 auto 4px auto;background:linear-gradient(90deg,#3bd97b 20%,#2b7a2b 80%);border-radius:2px;"></div>
+    </div>
+
+    <div class="menu-grid">
+      <!-- GUARD HOUSE (READY) -->
+      <a class="menu-card" href="index_mrtech.html" aria-label="Guard House">
+        <div class="menu-left">
+          <div class="menu-icon">GH</div>
+          <div style="min-width:0;">
+            <div class="menu-title">GUARD HOUSE</div>
+            <div class="menu-sub">READY</div>
+          </div>
+        </div>
+        <div class="menu-arrow">›</div>
+      </a>
+
+      <!-- TECHNICIAN / VENDOR (PLANNING) -->
+      <div class="menu-card disabled" role="button" tabindex="0" onclick="comingSoon('TECHNICIAN / VENDOR')" onkeydown="cardKey(event,'TECHNICIAN / VENDOR')">
+        <span class="badge">PLANNING</span>
+        <div class="menu-left">
+          <div class="menu-icon">TV</div>
+          <div style="min-width:0;">
+            <div class="menu-title">TECHNICIAN / VENDOR</div>
+            <div class="menu-sub">COMING SOON</div>
+          </div>
+        </div>
+        <div class="menu-arrow">›</div>
+      </div>
+
+      <!-- LOBBY ASSIST (PLANNING) -->
+      <div class="menu-card disabled" role="button" tabindex="0" onclick="comingSoon('LOBBY ASSIST')" onkeydown="cardKey(event,'LOBBY ASSIST')">
+        <span class="badge">PLANNING</span>
+        <div class="menu-left">
+          <div class="menu-icon">LA</div>
+          <div style="min-width:0;">
+            <div class="menu-title">LOBBY ASSIST</div>
+            <div class="menu-sub">COMING SOON</div>
+          </div>
+        </div>
+        <div class="menu-arrow">›</div>
+      </div>
+
+      <!-- FACILITY (PLANNING) -->
+      <div class="menu-card disabled" role="button" tabindex="0" onclick="comingSoon('FACILITY')" onkeydown="cardKey(event,'FACILITY')">
+        <span class="badge">PLANNING</span>
+        <div class="menu-left">
+          <div class="menu-icon">FC</div>
+          <div style="min-width:0;">
+            <div class="menu-title">FACILITY</div>
+            <div class="menu-sub">COMING SOON</div>
+          </div>
+        </div>
+        <div class="menu-arrow">›</div>
+      </div>
+    </div>
+
+    <div class="footer">POWERED BY MRED TECH</div>
+  </div>
+
+  <script>
+    function pad(n){return n<10?'0'+n:n;}
+    function updateDateTime(){
+      const now=new Date();
+      const d=pad(now.getDate());
+      const m=pad(now.getMonth()+1);
+      const y=now.getFullYear();
+      const h=pad(now.getHours());
+      const min=pad(now.getMinutes());
+      const s=pad(now.getSeconds());
+      document.getElementById("liveDateOnly").textContent = `${d}/${m}/${y}`;
+      document.getElementById("liveTimeOnly").textContent = `${h}:${min}:${s}`;
+    }
+    setInterval(updateDateTime,1000);
+    updateDateTime();
+
+    function comingSoon(name){
+      alert(name + "\n\nMODULE IN PLANNING (COMING SOON).");
+    }
+    function cardKey(e,name){
+      if(e.key==="Enter" || e.key===" "){
+        e.preventDefault();
+        comingSoon(name);
+      }
+    }
+  </script>
+</body>
+</html>
