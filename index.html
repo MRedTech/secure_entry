@@ -106,10 +106,22 @@ body{
 }
 
 .menu-icon{
-  font-size:34px;
-  margin-bottom:10px;
+  width:78px;
+  height:78px;
+  background:#000;
+  border-radius:16px;
+  margin:0 auto 10px auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.menu-icon img{ width:60px; 
 }
 
+.menu-tile:active .menu-icon{
+  transform:scale(0.96);
+}
+  
 .menu-title{
   font-size:14px;
   font-weight:900;
@@ -148,22 +160,30 @@ body{
 
   <div class="menu-tile"
     onclick="window.location.href='https://mredtech.github.io/repository-test/'">
-    <div class="menu-icon"></div>
+    <div class="menu-icon">
+  <img src="assets/icons/guard-house.png" alt="Guard House">
+    </div>
     <div class="menu-title">Guard House</div>
   </div>
 
   <div class="menu-tile">
-    <div class="menu-icon"></div>
+    <div class="menu-icon">
+  <img src="assets/icons/lobby.png" alt="Lobby">
+</div>
     <div class="menu-title">Lobby</div>
   </div>
 
   <div class="menu-tile">
-    <div class="menu-icon"></div>
+    <div class="menu-icon">
+  <img src="assets/icons/facility.png" alt="Facility">
+</div>
     <div class="menu-title">Facility</div>
   </div>
 
   <div class="menu-tile">
-    <div class="menu-icon"></div>
+    <div class="menu-icon">
+  <img src="assets/icons/technician.png" alt="Technician">
+</div>
     <div class="menu-title">Technician / Vendor</div>
   </div>
 
