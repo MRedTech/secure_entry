@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SECURE ENTRY - LANDING</title>
+  <style>
+    :root{
+      --bg:#e9f5e9;
+      --green1:#41e671;
+      --green2:#176B39;
+      --greenText:#2b7a2b;
+      --muted:#489167;
+      --card:#f3fbf3;
+      --card2:#eaf7ea;
+      --shadow: #176b3918;
+      --border:#d7ead7;
+    }
+    body{
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      padding: 18px 16px 22px;
+      text-transform: uppercase;
+      margin:0;
+    }
+    .container{max-width: 520px; margin:0 auto;}
+
+    /* CLOCK BAR (same vibe as index) */
+    .clock-bar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      width:100%;
+      max-width:240px;
+      margin:0 auto 14px auto;
+      padding:4px 14px;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--green1) 0%,var(--green2) 100%);
+      box-shadow:0 1px 4px 0 #bbdfbb70;
+      font-size:12px;
+      color:#fff;
+      letter-spacing:1.4px;
+      font-weight:900;
+      opacity:.92;
+    }
+
+    .header{
+      text-align:center;
+      margin-bottom: 10px;
+    }
+    .header-gradient{
+      background:linear-gradient(145deg,#54e087 0%,var(--greenText) 100%);
+      font-weight:900;
+      font-size: 2.2rem;
+      letter-spacing: 1.6px;
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      color:transparent;
+      margin: 0 0 6px 0;
+    }
+    .subtitle{
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0.7px;
+      margin-bottom: 10px;
+      font-weight:700;
+    }
+    .divider{
+      height:4px;
+      width:86px;
+      margin:0 auto 6px auto;
+      background:linear-gradient(90deg,#3bd97b 15%,var(--greenText) 85%);
+      border-radius:999px;
+      box-shadow:0 2px 8px #176b3918;
+    }
+
+    /* MENU GRID like screenshot (2 columns on phone) */
+    .menu-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    .card{
+      position:relative;
+      border-radius: 26px;
+      background: linear-gradient(180deg, #f7fff7 0%, var(--card) 55%, var(--card2) 100%);
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 26px var(--shadow);
+      padding: 18px 16px 18px 16px;
+      min-height: 150px;
+      cursor: pointer;
+      user-select:none;
+      transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      text-decoration:none;
+      color:#0f5a2f;
+      box-sizing:border-box;
+    }
+    .card:active{
+      transform: translateY(2px);
+      box-shadow: 0 10px 18px #176b3914;
+    }
+
+    .emoji{
+      font-size: 54px;
+      line-height: 1;
+      margin-top: 2px;
+      filter: drop-shadow(0 6px 10px #00000010);
+    }
+
+    .label{
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      font-size: 18px;
+      line-height: 1.05;
+      color: #1e6d3b;
+      text-shadow: 0 1px 0 #ffffffcc;
+      margin-top: 10px;
+    }
+
+    /* Full width card (FACILITY like screenshot) */
+    .span-2{ grid-column: 1 / span 2; }
+
+    /* planning style */
+    .disabled{
+      opacity: .78;
+      cursor: not-allowed;
+    }
+    .badge{
+      position:absolute;
+      top:14px;
+      right:16px;
+      font-size:10px;
+      font-weight:900;
+      letter-spacing:1.2px;
+      padding:5px 10px;
+      border-radius:999px;
+      background:linear-gradient(135deg,#f2f2f2 0%,#e8e8e8 60%,#dcdcdc 100%);
+      color:#2f2f2f;
+      box-shadow:0 10px 16px #00000010;
+    }
+
+    .footer{
+      text-align:center;
+      padding: 10px 5px 0;
+      font-size: 10px;
+      color:#888;
+      font-weight:900;
+      letter-spacing: 1px;
+      margin-top: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="clock-bar">
+      <span id="liveDateOnly"></span>
+      <span id="liveTimeOnly"></span>
+    </div>
+
+    <div class="header">
+      <h2 class="header-gradient">SECURE ENTRY</h2>
+      <div class="subtitle">REGISTER.ACCESS.SECURE</div>
+      <div class="divider"></div>
+    </div>
+
+    <div class="menu-grid">
+      <!-- GUARD HOUSE (READY) -->
+      <a class="card" href="index_mrtech.html" aria-label="Guard House">
+        <div class="emoji">🛡️</div>
+        <div class="label">GUARD<br>HOUSE</div>
+      </a>
+
+      <!-- TECHNICIAN / VENDOR (PLANNING) -->
+      <div class="card disabled" role="button" tabindex="0" onclick="comingSoon('TECHNICIAN / VENDOR')" onkeydown="cardKey(event,'TECHNICIAN / VENDOR')">
+        <span class="badge">PLANNING</span>
+        <div class="emoji">🛠️</div>
+        <div class="label">TECHNICIAN /<br>VENDOR</div>
+      </div>
+
+      <!-- LOBBY ASSIST (PLANNING) -->
+      <div class="card disabled" role="button" tabindex="0" onclick="comingSoon('LOBBY ASSIST')" onkeydown="cardKey(event,'LOBBY ASSIST')">
+        <span class="badge">PLANNING</span>
+        <div class="emoji">🧑‍💼</div>
+        <div class="label">LOBBY<br>ASSIST</div>
+      </div>
+
+      <!-- FACILITY (PLANNING) - full width like screenshot -->
+      <div class="card disabled span-2" role="button" tabindex="0" onclick="comingSoon('FACILITY')" onkeydown="cardKey(event,'FACILITY')">
+        <span class="badge">PLANNING</span>
+        <div class="emoji">🏊‍♂️</div>
+        <div class="label">FACILITY</div>
+      </div>
+    </div>
+
+    <div class="footer">POWERED BY MRED TECH</div>
+  </div>
+
+  <script>
+    function pad(n){return n<10?'0'+n:n;}
+    function updateDateTime(){
+      const now=new Date();
+      const d=pad(now.getDate());
+      const m=pad(now.getMonth()+1);
+      const y=now.getFullYear();
+      const h=pad(now.getHours());
+      const min=pad(now.getMinutes());
+      const s=pad(now.getSeconds());
+      document.getElementById("liveDateOnly").textContent = `${d}/${m}/${y}`;
+      document.getElementById("liveTimeOnly").textContent = `${h}:${min}:${s}`;
+    }
+    setInterval(updateDateTime,1000);
+    updateDateTime();
+
+    function comingSoon(name){
+      alert(name + "\n\nMODULE IN PLANNING (COMING SOON).");
+    }
+    function cardKey(e,name){
+      if(e.key==="Enter" || e.key===" "){
+        e.preventDefault();
+        comingSoon(name);
+      }
+    }
+  </script>
+</body>
+</html>
