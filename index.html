@@ -105,21 +105,43 @@ body{
     inset 0 1px 0 rgba(255,255,255,.5);
 }
 
+/* ===== MENU ICON (2 COLUMN – FIXED) ===== */
 .menu-icon{
-  width:78px;
-  height:78px;
+  width:88px;
+  height:88px;
+  margin:0 auto 12px auto;
   background:#000;
-  border-radius:16px;
-  margin:0 auto 10px auto;
+  border-radius:18px;
   display:flex;
   align-items:center;
   justify-content:center;
-}
-.menu-icon img{ width:60px; 
+  box-shadow:
+    0 6px 14px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.08);
 }
 
+.menu-icon img{
+  max-width:68px;
+  max-height:68px;
+  object-fit:contain;
+  display:block;
+}
+
+/* tekan effect */
 .menu-tile:active .menu-icon{
   transform:scale(0.96);
+}
+
+/* desktop kecil sikit */
+@media (min-width:768px){
+  .menu-icon{
+    width:78px;
+    height:78px;
+  }
+  .menu-icon img{
+    max-width:60px;
+    max-height:60px;
+  }
 }
   
 .menu-title{
@@ -158,35 +180,39 @@ body{
 <!-- MENU -->
 <div class="menu-grid">
 
+  <!-- Guard House -->
   <div class="menu-tile"
-    onclick="window.location.href='https://mredtech.github.io/repository-test/'">
+       onclick="window.location.href='https://mredtech.github.io/repository-test/'">
     <div class="menu-icon">
-  <img src="assets/icons/guard-house.png" alt="Guard House">
+      <img src="assets/icons/icon-guard-house.png" alt="Guard House">
     </div>
     <div class="menu-title">Guard House</div>
   </div>
 
+  <!-- Lobby -->
   <div class="menu-tile">
     <div class="menu-icon">
-  <img src="assets/icons/lobby.png" alt="Lobby">
-</div>
+      <img src="assets/icons/icon-lobby.png" alt="Lobby">
+    </div>
     <div class="menu-title">Lobby</div>
   </div>
 
+  <!-- Facility -->
   <div class="menu-tile">
     <div class="menu-icon">
-  <img src="assets/icons/facility.png" alt="Facility">
-</div>
+      <img src="assets/icons/icon-facility.png" alt="Facility">
+    </div>
     <div class="menu-title">Facility</div>
   </div>
 
+  <!-- Technician / Vendor -->
   <div class="menu-tile">
     <div class="menu-icon">
-  <img src="assets/icons/technician.png" alt="Technician">
-</div>
+      <img src="assets/icons/icon-technician.png" alt="Technician">
+    </div>
     <div class="menu-title">Technician / Vendor</div>
   </div>
-
+  
 </div>
 
 <!-- FOOTER -->
