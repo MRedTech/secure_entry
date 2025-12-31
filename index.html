@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SECURE ENTRY</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===== BASE ===== */
+body{
+  margin:0;
+  padding:20px;
+  font-family: Arial, sans-serif;
+  background:#e9f5e9;
+  text-transform: uppercase;
+}
+
+/* ===== LANDING LOCK (PASSWORD) ===== */
+#landingApp.lock-blur{ filter: blur(10px); }
+.lock-overlay{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  background:rgba(233,245,233,.70);
+  backdrop-filter: blur(6px);
+}
+
+.lock-card {
+  width: 280px;              /* asal besar → kecil */
+  padding: 16px 16px 14px;   /* asal longgar → padat */
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+/* ===== LOCK LANDING - CENTER TEXT ===== */
+.lock-card {
+  text-align: center;
+}
+
+/* Tajuk utama */
+.lock-card h1,
+.lock-card h2 {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Sub text */
+.lock-card p {
+  text-align: center;
+}
+
+/* Optional: center placeholder text */
+.lock-card input::placeholder {
+  text-align: center;
+}
+
+/* Pastikan input text pun center bila taip */
+.lock-card input {
+  text-align: center;
+}
+.lock-title{
+  font-size:26px;
+  font-weight:900;
+  letter-spacing:1.3px;
+  margin:4px 0 6px;
+  background:linear-gradient(145deg,#54e087 0%, #2b7a2b 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.lock-sub{
+  font-size:11px;
+  color:#489167;
+  letter-spacing:.8px;
+  margin:0 0 12px;
+}
+/* ===== LOCK LANDING - PASSWORD INPUT ===== */
+.lock-card input {
+  width: 100%;
+  max-width: 220px;          /* sama lebar dengan button */
+  height: 38px;              /* compact tapi selesa ditekan */
+  margin: 0 auto 12px;
+  display: block;
+
+  font-size: 13px;
+  text-align: center;
+
+  padding: 8px 12px;
+  border-radius: 12px;
+
+  border: 1.5px solid #cfe9da;
+  background: #ffffff;
+
+  outline: none;
+}
+
+/* Focus state (bila klik) */
+.lock-card input:focus {
+  border-color: #6fcf97;
+  box-shadow: 0 0 0 2px rgba(111, 207, 151, 0.25);
+}
+
+/* Placeholder */
+.lock-card input::placeholder {
+  color: #9aa9a0;
+  font-size: 13px;
+}
+/* ===== LOCK LANDING - ENTER BUTTON ===== */
+.lock-card button {
+  width: 100%;
+  max-width: 220px;          /* sama dengan input */
+  height: 38px;              /* sama tinggi dengan input */
+  margin: 0 auto 12px;
+  display: block;
+
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+
+  border-radius: 12px;
+  border: none;
+
+  background:linear-gradient(90deg,#41e671 0%, #176B39 100%);
+  color: #ffffff;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Hover / active */
+.lock-card button:hover {
+  filter: brightness(1.05);
+}
+
+.lock-card button:active {
+  transform: scale(0.98);
+}
+
+/* ===== CLOCK BAR (EXACT FORM MATCH) ===== */
+.clock-bar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  width:100%;
+  max-width:180px;
+  margin:0 auto 13px auto;
+  padding:2.5px 12px;
+  border-radius:11px;
+  background:linear-gradient(90deg,#41e671 0%, #176B39 100%);
+  box-shadow:0 1px 4px 0 #bbdfbb70;
+  font-size:10px;
+  color:#fff;
+  letter-spacing:1.4px;
+  font-family: Arial, sans-serif;
+  font-weight:bold;
+  opacity:0.90;
+}
+
+/* ===== HEADER ===== */
+.header{
+  text-align:center;
+  margin-bottom:22px;
+}
+
+.header h1{
+  margin:6px 0 4px 0;
+  font-size:26px;
+  font-weight:900;
+  letter-spacing:1.3px;
+  background:linear-gradient(145deg,#54e087 0%, #2b7a2b 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.header .sub{
+  font-size:11px;
+  color:#489167;
+  letter-spacing:.8px;
+  margin-bottom:6px;
+}
+
+/* ===== LINE GRADIENT (SAME AS FORM) ===== */
+.header-line{
+  height:3px;
+  width:60px;
+  margin:0 auto 6px auto;
+  background:linear-gradient(90deg,#3bd97b 20%, #2b7a2b 80%);
+  border-radius:2px;
+}
+  
+/* ===== SWEETALERT SECURE ENTRY ===== */
+.se-swal-title {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.se-swal-text {
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+.se-swal-ok-btn {
+  margin-top: 14px;
+  padding: 8px 22px;
+  font-size: 14px;
+  font-weight: 600;
+
+  color: #ffffff;
+  background: linear-gradient(135deg, #2f9e44, #1c7c35);
+  border-radius: 10px;
+  border: none;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+}
+
+.se-swal-ok-btn:active {
+  transform: scale(0.97);
+}
+
+.se-swal-popup {
+  padding: 0 !important; /* padding dikawal oleh customClass dalam SweetAlert */
+}
+  
+/* ===== MENU GRID ===== */
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+  max-width:420px;
+  margin:0 auto;
+}
+
+@media(min-width:768px){
+  .menu-grid{
+    grid-template-columns:repeat(3,1fr);
+    max-width:720px;
+  }
+}
+
+/* ===== MENU TILE (3D – SAME FEEL) ===== */
+.menu-tile{
+  background:linear-gradient(145deg,#ffffff,#e3f3e6);
+  border-radius:16px;
+  padding:22px 12px;
+  text-align:center;
+  box-shadow:
+    0 6px 14px rgba(0,0,0,.12),
+    inset 0 1px 0 rgba(255,255,255,.7);
+  cursor:pointer;
+  transition:all .15s ease;
+  user-select:none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.menu-tile:active{
+  transform:translateY(3px);
+  box-shadow:
+    0 3px 8px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.5);
+}
+
+/* ===== MENU ICON ===== */
+.menu-icon{
+  width:100px;              
+  height:100px;
+  margin:0 auto 4px auto;
+  background:transparent;   
+  border-radius:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.menu-icon img{
+  width:100px;         
+  height:auto;
+  object-fit:contain;
+  display:block;
+}
+  
+/* tekan effect */
+.menu-tile:active .menu-icon{
+  transform:scale(0.96);
+}
+
+/* desktop kecil sikit */
+@media (min-width:768px){
+  .menu-icon{
+    width:78px;
+    height:78px;
+  }
+  .menu-icon img{
+    max-width:60px;
+    max-height:60px;
+  }
+}
+  
+.menu-title{
+  margin-top:1px;        
+  font-size:14px;
+  font-weight:900;
+  letter-spacing:1px;
+  color:#176B39;
+  line-height:1.2;          
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  position: fixed;
+  bottom: 8px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 10px;
+  color: #9aa9a0;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  /*letter-spacing: 0.8px;*/
+  pointer-events: none;
+}
+
+</style>
+</head>
+
+<body>
+<!-- LOCK OVERLAY (PASSWORD) -->
+<div id="lockOverlay" class="lock-overlay" aria-hidden="true">
+  <div class="lock-card">
+    <div class="lock-title">SECURE ENTRY</div>
+    <div class="lock-sub">ENTER PASSWORD TO ACCESS</div>
+    <input id="lockPass" class="lock-input" type="password" inputmode="text" autocomplete="off" placeholder="****" />
+    <button id="lockBtn" class="lock-btn" type="button">ENTER PASSWORD</button>
+  </div>
+</div>
+
+<div id="landingApp">
+<!-- CLOCK -->
+<div class="clock-bar">
+  <span id="date"></span>
+  <span id="time"></span>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>SECURE ENTRY</h1>
+  <div class="sub">REGISTER.ACCESS.SECURE</div>
+  <div class="header-line"></div>
+</div>
+  
+<!-- MENU -->
+<div class="menu-grid">
+
+  <!-- Guard House -->
+  <div class="menu-tile"
+       onclick="window.location.href='https://mredtech.github.io/repository-test/'">
+    <div class="menu-icon">
+      <img src="assets/icons/icon-guard-house.webp" alt="Guard House">
+    </div>
+    <div class="menu-title">Guard House</div>
+  </div>
+
+  <!-- Technician / Vendor -->
+  <div class="menu-tile">
+    <div class="menu-icon">
+      <img src="assets/icons/icon-technician.webp" alt="Technician">
+    </div>
+    <div class="menu-title">Technician / Vendor</div>
+  </div>
+  
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  POWERED BY MRED TECH
+</div>
+
+</div>
+
+<script>
+function pad(n){return n<10?'0'+n:n;}
+function updateClock(){
+  const d=new Date();
+  document.getElementById('date').textContent=
+    pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear();
+  document.getElementById('time').textContent=
+    pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
+}
+setInterval(updateClock,1000);
+updateClock();
+</script>
+
+<!-- SweetAlert2 (optional, used for nicer messages). If blocked/slow, system still works. -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+// =====================
+// LANDING PASSWORD LOCK
+// =====================
+const LANDING_PASSWORD = "mredtech";   // <-- Tukar password sini
+const AUTH_KEY = "SE_LANDING_AUTH_V1";
+
+function showMsg(type, title, text){
+  if (window.Swal && Swal.fire) {
+    const icon = (type === 'ok') ? 'success' : (type === 'warn') ? 'warning' : 'error';
+    return Swal.fire({
+      icon,
+      title: title || (type === 'ok' ? 'ACCESS GRANTED' : 'INCORRECT PASSWORD'),
+      text: text || (type === 'ok' ? 'WELCOME TO SECURE ENTRY' : ''),
+
+      confirmButtonText: 'OK',
+
+      background: 'linear-gradient(135deg, #e9f7ef 0%, #c8efd9 45%, #9fdfbf 100%)',
+      color: '#176B39',
+      width: 300,
+
+      buttonsStyling: false,
+      customClass: {
+        popup: 'se-swal-popup',
+        title: 'se-swal-title',
+        htmlContainer: 'se-swal-text',
+        confirmButton: 'se-swal-ok-btn'
+      },
+
+      heightAuto: false,
+
+      willOpen: (popup) => {
+        popup.style.borderRadius = '16px';
+      }
+    });
+    }
+  alert((title||'') + (text?"\n"+text:""));
+  return Promise.resolve();
+}
+
+function lockUI(isLocked){
+  const app = document.getElementById('landingApp');
+  const ov  = document.getElementById('lockOverlay');
+  if (!app || !ov) return;
+  if (isLocked) {
+    app.classList.add('lock-blur');
+    app.style.pointerEvents = 'none';
+    ov.style.display = 'flex';
+    ov.setAttribute('aria-hidden','false');
+    setTimeout(() => {
+      const inp = document.getElementById('lockPass');
+      if (inp) inp.focus();
+    }, 50);
+  } else {
+    app.classList.remove('lock-blur');
+    app.style.pointerEvents = '';
+    ov.style.display = 'none';
+    ov.setAttribute('aria-hidden','true');
+  }
+}
+
+function isAuthed(){
+  return sessionStorage.getItem(AUTH_KEY) === '1';
+}
+
+function setAuthed(){
+  sessionStorage.setItem(AUTH_KEY, '1');
+}
+
+function tryUnlock(){
+  const inp = document.getElementById('lockPass');
+  const val = (inp ? inp.value : '').trim();
+  if (!val) return showMsg('warn','Password Required');
+  if (val === LANDING_PASSWORD) {
+    setAuthed();
+    lockUI(false);
+    return showMsg('ok','ACCESS GRANTED','WELCOME TO SECURE ENTRY');
+  }
+  if (inp) inp.value = '';
+  return showMsg('err','WRONG PASSWORD','PLEASE TRY AGAIN.');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // start locked unless already authed
+  lockUI(!isAuthed());
+
+  const btn = document.getElementById('lockBtn');
+  const inp = document.getElementById('lockPass');
+  if (btn) btn.addEventListener('click', tryUnlock);
+  if (inp) {
+    inp.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') tryUnlock();
+    });
+  }
+});
+</script>
+
+</body>
+</html>
