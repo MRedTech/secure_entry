@@ -87,22 +87,36 @@ body{
   outline:none;
   background:#fff;
 }
-.lock-btn{
-  width:100%;
-  margin-top:12px;
-  border:none;
-  border-radius:16px;
-  padding:14px 16px;
-  font-size:16px;
-  font-weight:900;
-  letter-spacing:1px;
-  color:#fff;
-  cursor:pointer;
-  background:linear-gradient(90deg,#41e671 0%, #176B39 100%);
-  box-shadow:0 8px 16px rgba(0,0,0,.18);
-  -webkit-tap-highlight-color: transparent;
+/* ===== LOCK LANDING - ENTER BUTTON ===== */
+.lock-card button {
+  width: 100%;
+  max-width: 220px;          /* sama dengan input */
+  height: 38px;              /* sama tinggi dengan input */
+  margin: 0 auto;
+  display: block;
+
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+
+  border-radius: 12px;
+  border: none;
+
+  background: linear-gradient(135deg, #7ae28c, #4caf50);
+  color: #ffffff;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
-.lock-btn:active{ transform: translateY(2px); }
+
+/* Hover / active */
+.lock-card button:hover {
+  filter: brightness(1.05);
+}
+
+.lock-card button:active {
+  transform: scale(0.98);
+}
 
 /* ===== CLOCK BAR (EXACT FORM MATCH) ===== */
 .clock-bar{
