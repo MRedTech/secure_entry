@@ -355,14 +355,14 @@ function setAuthed(){
 function tryUnlock(){
   const inp = document.getElementById('lockPass');
   const val = (inp ? inp.value : '').trim();
-  if (!val) return showMsg('warn','Password Required','Sila masukkan password.');
+  if (!val) return showMsg('warn','Password Required');
   if (val === LANDING_PASSWORD) {
     setAuthed();
     lockUI(false);
     return showMsg('ok','Access Granted','Welcome to Secure Entry.');
   }
   if (inp) inp.value = '';
-  return showMsg('err','Wrong Password','Cuba lagi.');
+  return showMsg('err','Wrong Password','Please try again.');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
