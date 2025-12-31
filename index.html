@@ -129,6 +129,25 @@ body{
   background:linear-gradient(90deg,#3bd97b 20%, #2b7a2b 80%);
   border-radius:2px;
 }
+
+/* ===== SWEET ALERT ===== */
+.swal-confirm-green {
+  background: linear-gradient(135deg, #2f9e44, #1c7c35);
+  color: #fff;
+  border-radius: 10px;
+  padding: 8px 18px;
+  font-size: 13px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.swal-cancel-outline {
+  background: transparent;
+  color: #176B39;
+  border: 1.5px solid #176B39;
+  border-radius: 10px;
+  padding: 8px 18px;
+  font-size: 13px;
+}
   
 /* ===== MENU GRID ===== */
 .menu-grid{
@@ -312,12 +331,26 @@ function showMsg(type, title, text){
   if (window.Swal && Swal.fire) {
     const icon = (type === 'ok') ? 'success' : (type === 'warn') ? 'warning' : 'error';
     return Swal.fire({
-      icon,
-      title: title || (type==='ok'?'Access Granted':'Incorrect Password'),
-      text: text || '',
-      confirmButtonText: 'OK',
-      heightAuto: false
-    });
+  icon,
+  title: title || (type === 'ok' ? 'Access Granted' : 'Incorrect Password'),
+  text: text || '',
+
+  confirmButtonText: 'OK',
+
+  background: 'linear-gradient(135deg, #e9f7ef 0%, #c8efd9 45%, #9fdfbf 100%)',
+  color: '#176B39',
+  width: 300,
+
+  customClass: {
+    popup: 'shadow-2xl px-7 pt-7 pb-6'
+  },
+
+  heightAuto: false,
+
+  willOpen: popup => {
+    popup.style.borderRadius = '14px';
+  }
+});
   }
   alert((title||'') + (text?"\n"+text:""));
   return Promise.resolve();
