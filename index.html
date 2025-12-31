@@ -27,11 +27,32 @@ body{
   background:rgba(233,245,233,.70);
   backdrop-filter: blur(6px);
 }
+/* ===== LOCK LANDING - CENTER TEXT ===== */
 .lock-card {
-  width: 280px;              /* asal besar → kecil */
-  padding: 16px 16px 14px;   /* asal longgar → padat */
-  border-radius: 14px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+/* Tajuk utama */
+.lock-card h1,
+.lock-card h2 {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Sub text */
+.lock-card p {
+  text-align: center;
+}
+
+/* Optional: center placeholder text */
+.lock-card input::placeholder {
+  text-align: center;
+}
+
+/* Pastikan input text pun center bila taip */
+.lock-card input {
+  text-align: center;
 }
 .lock-title{
   font-size:26px;
