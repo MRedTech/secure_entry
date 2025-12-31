@@ -76,24 +76,43 @@ body{
   letter-spacing:.8px;
   margin:0 0 12px;
 }
-.lock-input{
-  width:100%;
-  box-sizing:border-box;
-  border-radius:14px;
-  border:1px solid #cfe7d3;
-  padding:14px 14px;
-  font-size:14px;
-  text-transform:none;
-  outline:none;
-  background:#fff;
+/* ===== LOCK LANDING - PASSWORD INPUT ===== */
+.lock-card input {
+  width: 100%;
+  max-width: 220px;          /* kecilkan box */
+  height: 38px;              /* lebih compact */
+  margin: 0 auto 12px;       /* center + jarak bawah */
+  display: block;
+
+  font-size: 13px;
+  text-align: center;
+
+  padding: 8px 12px;
+  border-radius: 12px;
+
+  border: 1.5px solid #cfe9da;
+  background: #ffffff;
+
+  outline: none;
+}
+
+/* Focus state (bila klik) */
+.lock-card input:focus {
+  border-color: #6fcf97;
+  box-shadow: 0 0 0 2px rgba(111, 207, 151, 0.25);
+}
+
+/* Placeholder */
+.lock-card input::placeholder {
+  color: #9aa9a0;
+  font-size: 13px;
 }
 /* ===== LOCK LANDING - ENTER BUTTON ===== */
 .lock-card button {
   width: 100%;
   max-width: 220px;          /* sama dengan input */
   height: 38px;              /* sama tinggi dengan input */
-  margin-top: 2px;
-  margin: 0 auto;
+  margin: 0 auto 12px;
   display: block;
 
   font-size: 13px;
@@ -297,7 +316,7 @@ body{
   <div class="lock-card">
     <div class="lock-title">SECURE ENTRY</div>
     <div class="lock-sub">ENTER PASSWORD TO ACCESS</div>
-    <input id="lockPass" class="lock-input" type="password" inputmode="text" autocomplete="off" placeholder="Password" />
+    <input id="lockPass" class="lock-input" type="password" inputmode="text" autocomplete="off" placeholder="****" />
     <button id="lockBtn" class="lock-btn" type="button">ENTER PASSWORD</button>
   </div>
 </div>
