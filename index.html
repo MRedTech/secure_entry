@@ -79,7 +79,7 @@ body{
 /* ===== LOCK LANDING - PASSWORD INPUT ===== */
 .lock-card input {
   width: 100%;
-  max-width: 190px;          /* kecilkan box */
+  max-width: 195px;          /* kecilkan box */
   height: 15px;              /* lebih compact */
   margin: 0 auto 12px;       /* center + jarak bawah */
   display: block;
@@ -389,10 +389,10 @@ const AUTH_KEY = "SE_LANDING_AUTH_V1";
 
 function showMsg(type, title, text){
   if (window.Swal && Swal.fire) {
-    const icon = (type === 'ok') ? 'success' : (type === 'warn') ? 'warning' : 'error';
+    const icon = (type === 'ok') ? 'SUCCESS' : (type === 'warn') ? 'WARNING' : 'error';
     return Swal.fire({
   icon,
-  title: title || (type === 'ok' ? 'Access Granted' : 'Incorrect Password'),
+  title: title || (type === 'ok' ? 'ACCESS GRANTED' : 'INCORRECT PASSWORD'),
   text: text || '',
 
   confirmButtonText: 'OK',
@@ -452,10 +452,10 @@ function tryUnlock(){
   if (val === LANDING_PASSWORD) {
     setAuthed();
     lockUI(false);
-    return showMsg('ok','Access Granted','Welcome to Secure Entry.');
+    return showMsg('ok','ACCESS GRANTED','WELCOME TO SECURE ENTRY');
   }
   if (inp) inp.value = '';
-  return showMsg('err','Wrong Password','Please try again.');
+  return showMsg('err','WRONG PASSWORD','PLEASE TRY AGAIN.');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
