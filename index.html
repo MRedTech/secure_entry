@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SECURE ENTRY</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===== BASE ===== */
+body{
+  margin:0;
+  padding:20px;
+  font-family: Arial, sans-serif;
+  background:#e9f5e9;
+  text-transform: uppercase;
+}
+
+/* ===== CLOCK BAR (EXACT FORM MATCH) ===== */
+.clock-bar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  width:100%;
+  max-width:180px;
+  margin:0 auto 13px auto;
+  padding:2.5px 12px;
+  border-radius:11px;
+  background:linear-gradient(90deg,#41e671 0%, #176B39 100%);
+  box-shadow:0 1px 4px 0 #bbdfbb70;
+  font-size:10px;
+  color:#fff;
+  letter-spacing:1.4px;
+  font-family: Arial, sans-serif;
+  font-weight:bold;
+  opacity:0.90;
+}
+
+/* ===== HEADER ===== */
+.header{
+  text-align:center;
+  margin-bottom:22px;
+}
+
+.header h1{
+  margin:6px 0 4px 0;
+  font-size:26px;
+  font-weight:900;
+  letter-spacing:1.3px;
+  background:linear-gradient(145deg,#54e087 0%, #2b7a2b 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.header .sub{
+  font-size:11px;
+  color:#489167;
+  letter-spacing:.8px;
+  margin-bottom:6px;
+}
+
+/* ===== LINE GRADIENT (SAME AS FORM) ===== */
+.header-line{
+  height:3px;
+  width:60px;
+  margin:0 auto 6px auto;
+  background:linear-gradient(90deg,#3bd97b 20%, #2b7a2b 80%);
+  border-radius:2px;
+}
+  
+/* ===== MENU GRID ===== */
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+  max-width:420px;
+  margin:0 auto;
+}
+
+@media(min-width:768px){
+  .menu-grid{
+    grid-template-columns:repeat(3,1fr);
+    max-width:720px;
+  }
+}
+
+/* ===== MENU TILE (3D – SAME FEEL) ===== */
+.menu-tile{
+  background:linear-gradient(145deg,#ffffff,#e3f3e6);
+  border-radius:16px;
+  padding:22px 12px;
+  text-align:center;
+  box-shadow:
+    0 6px 14px rgba(0,0,0,.12),
+    inset 0 1px 0 rgba(255,255,255,.7);
+  cursor:pointer;
+  transition:all .15s ease;
+  user-select:none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.menu-tile:active{
+  transform:translateY(3px);
+  box-shadow:
+    0 3px 8px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.5);
+}
+
+/* ===== MENU ICON ===== */
+.menu-icon{
+  width:100px;              
+  height:100px;
+  margin:0 auto 4px auto;
+  background:transparent;   
+  border-radius:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.menu-icon img{
+  width:100px;         
+  height:auto;
+  object-fit:contain;
+  display:block;
+}
+  
+/* tekan effect */
+.menu-tile:active .menu-icon{
+  transform:scale(0.96);
+}
+
+/* desktop kecil sikit */
+@media (min-width:768px){
+  .menu-icon{
+    width:78px;
+    height:78px;
+  }
+  .menu-icon img{
+    max-width:60px;
+    max-height:60px;
+  }
+}
+  
+.menu-title{
+  margin-top:1px;        
+  font-size:14px;
+  font-weight:900;
+  letter-spacing:1px;
+  color:#176B39;
+  line-height:1.2;          
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  position: fixed;
+  bottom: 8px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 10px;
+  color: #9aa9a0;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  /*letter-spacing: 0.8px;*/
+  pointer-events: none;
+}
+
+</style>
+<!-- SweetAlert2 (Password Popup) -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+<script>document.documentElement.classList.add('SE_LOCK');</script>
+<style>
+/* ===== PASSWORD LOCK (Landing) ===== */
+.SE_LOCK #landingContent{
+  filter: blur(6px);
+  pointer-events: none;
+  user-select: none;
+}
+#lockOverlay{display:none;}
+.SE_LOCK #lockOverlay{display:flex;}
+
+#lockOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(233,245,233,0.92);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  align-items:center;
+  justify-content:center;
+  z-index:9998;
+  padding:18px;
+  text-align:center;
+}
+#lockCard{
+  width:min(360px, 92vw);
+  background:linear-gradient(145deg,#ffffff,#e3f3e6);
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(0,0,0,.14), inset 0 1px 0 rgba(255,255,255,.7);
+  padding:18px 16px;
+}
+#lockTitle{
+  font-size:18px;
+  font-weight:900;
+  letter-spacing:1.2px;
+  margin:0 0 6px 0;
+  background:linear-gradient(145deg,#54e087 0%, #2b7a2b 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+#lockSub{
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:0.9px;
+  color:#176B39;
+  margin:0 0 12px 0;
+}
+#lockBtn{
+  width:100%;
+  border:none;
+  border-radius:12px;
+  padding:12px 16px;
+  font-weight:900;
+  letter-spacing:1.8px;
+  color:#fff;
+  background:linear-gradient(135deg,#2b7a2b 0%,#3bd97b 100%);
+  box-shadow:0 3px 12px 0 #bbdfbb, 0 1.5px 3px #3333;
+}
+#lockBtn:active{
+  transform:translateY(2px);
+  box-shadow:0 2px 6px #bbb;
+}
+
+/* SweetAlert styling (match Secure Entry feel) */
+.swal2-popup{
+  width:300px !important;
+  max-width:300px !important;
+  padding:14px 16px !important;
+  border-radius:14px !important;
+}
+.swal2-title{
+  margin:0 0 6px 0 !important;
+  font-size:16px !important;
+  font-weight:900 !important;
+  letter-spacing:1.2px !important;
+}
+.swal2-html-container{
+  margin:0 !important;
+  font-size:13px !important;
+  font-weight:bold !important;
+  line-height:1.35 !important;
+  letter-spacing:0.7px !important;
+}
+.swal2-actions{margin:12px 0 0 0 !important;gap:10px;}
+.swal2-confirm{
+  background:linear-gradient(135deg,#2b7a2b 0%,#3bd97b 100%) !important;
+  color:#fff !important;
+  font-weight:bold !important;
+  border:none !important;
+  border-radius:10px !important;
+  box-shadow:0 3px 12px 0 #bbdfbb, 0 1.5px 3px #3333 !important;
+  letter-spacing:1.6px;
+  padding:10px 22px !important;
+  font-size:14px !important;
+}
+.swal2-confirm:active{box-shadow:0 2px 5px #bbb !important;transform:translateY(2px);}
+.swal2-input{
+  border:1px solid #2b7a2b !important;
+  border-radius:10px !important;
+  font-weight:bold !important;
+  letter-spacing:1.4px !important;
+  text-transform:uppercase !important;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body>
+<div id="landingContent">
+<!-- CLOCK -->
+<div class="clock-bar">
+  <span id="date"></span>
+  <span id="time"></span>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>SECURE ENTRY</h1>
+  <div class="sub">REGISTER.ACCESS.SECURE</div>
+  <div class="header-line"></div>
+</div>
+  
+<!-- MENU -->
+<div class="menu-grid">
+
+  <!-- Guard House -->
+  <div class="menu-tile"
+       onclick="window.location.href='https://mredtech.github.io/repository-test/'">
+    <div class="menu-icon">
+      <img src="assets/icons/icon-guard-house.webp" alt="Guard House">
+    </div>
+    <div class="menu-title">Guard House</div>
+  </div>
+
+  <!-- Technician / Vendor -->
+  <div class="menu-tile">
+    <div class="menu-icon">
+      <img src="assets/icons/icon-technician.webp" alt="Technician">
+    </div>
+    <div class="menu-title">Technician / Vendor</div>
+  </div>
+  
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  POWERED BY MRED TECH
+</div>
+
+<script>
+function pad(n){return n<10?'0'+n:n;}
+function updateClock(){
+  const d=new Date();
+  document.getElementById('date').textContent=
+    pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear();
+  document.getElementById('time').textContent=
+    pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
+}
+setInterval(updateClock,1000);
+updateClock();
+</script>
+
+</div>
+
+<!-- PASSWORD OVERLAY -->
+<div id="lockOverlay">
+  <div id="lockCard">
+    <div id="lockTitle">SECURE ENTRY</div>
+    <div id="lockSub">ENTER PASSWORD TO ACCESS</div>
+    <button id="lockBtn" type="button">ENTER PASSWORD</button>
+  </div>
+</div>
+
+<script>
+/* ===== LANDING PASSWORD (SweetAlert2) =====
+   Password stored in HTML (frontend). Change LANDING_PASSWORD below.
+*/
+const LANDING_PASSWORD = "SENSORY@2025";   // <-- Tukar password kat sini
+const LANDING_AUTH_KEY = "SE_LANDING_AUTH";
+
+function unlockLanding(){
+  try{ sessionStorage.setItem(LANDING_AUTH_KEY, "1"); }catch(e){}
+  document.documentElement.classList.remove("SE_LOCK");
+}
+
+function isAuthed(){
+  try{ return sessionStorage.getItem(LANDING_AUTH_KEY) === "1"; }
+  catch(e){ return false; }
+}
+
+async function promptPassword(){
+  // If already authed, unlock immediately
+  if (isAuthed()){ unlockLanding(); return; }
+
+  // SweetAlert available
+  if (typeof Swal !== "undefined"){
+    const res = await Swal.fire({
+      title: "SECURE ENTRY",
+      html: "ENTER PASSWORD TO ACCESS",
+      input: "password",
+      inputPlaceholder: "PASSWORD",
+      inputAttributes: { autocapitalize: "off", autocomplete: "off" },
+      confirmButtonText: "ENTER",
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      backdrop: true,
+      background: "linear-gradient(135deg,#e9f5e9,#fff,#d5ffe0)",
+      color: "#176B39",
+      width: 300,
+      preConfirm: (val) => {
+        const v = (val || "").toString().trim();
+        if (!v){ Swal.showValidationMessage("PASSWORD REQUIRED"); return false; }
+        if (v !== LANDING_PASSWORD){ Swal.showValidationMessage("WRONG PASSWORD"); return false; }
+        return true;
+      }
+    });
+    if (res.isConfirmed){ unlockLanding(); }
+    return;
+  }
+
+  // Fallback: native prompt (avoid blank screen if CDN blocked)
+  const v = (prompt("ENTER PASSWORD TO ACCESS") || "").toString().trim();
+  if (v === LANDING_PASSWORD){ unlockLanding(); }
+  else { alert("WRONG PASSWORD"); }
+}
+
+(function initPassword(){
+  const btn = document.getElementById("lockBtn");
+  if (btn) btn.addEventListener("click", promptPassword);
+
+  // Auto prompt once page ready (but never leave blank)
+  window.addEventListener("load", () => {
+    if (!isAuthed()){
+      // Try prompt immediately
+      promptPassword();
+      // Extra failsafe: if still locked after 2s (CDN slow), keep overlay button usable
+      setTimeout(() => {
+        // Do nothing; overlay already visible + button available
+      }, 2000);
+    } else {
+      unlockLanding();
+    }
+  });
+})();
+</script>
+</body>
+</html>
