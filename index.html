@@ -202,18 +202,27 @@ body{
   margin-top: 4px;
 }
 
+/* ===== SWEETALERT OK BUTTON – MATCH FORM ===== */
 .se-swal-ok-btn {
   margin-top: 10px;
-  padding: 6px 18px;
+  padding: 6px 20px;
   font-size: 12px;
   font-weight: 700;
+  letter-spacing: 0.5px;
 
   color: #ffffff;
-  background: linear-gradient(135deg, #2f9e44, #1c7c35);
-  border-radius: 10px;
+  background: linear-gradient(90deg, #41e671 0%, #176B39 100%);
+  border-radius: 12px;
   border: none;
 
-  box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  cursor: pointer;
+}
+
+/* tekan effect – sama feel dengan form */
+.se-swal-ok-btn:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.18);
 }
 
 .se-swal-ok-btn:active {
