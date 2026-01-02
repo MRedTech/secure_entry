@@ -354,7 +354,7 @@ body{
   <div class="lock-card">
     <div class="lock-title">SECURE ENTRY</div>
     <div class="lock-sub">ENTER PASSWORD TO ACCESS</div>
-    <input id="lockPass" class="lock-input" type="password" inputmode="text" autocomplete="off" placeholder="****" />
+    <input id="lockPass" class="lock-input" type="password" inputmode="text" autocomplete="off" placeholder="" />
     <button id="lockBtn" class="lock-btn" type="button">ENTER PASSWORD</button>
   </div>
 </div>
@@ -375,7 +375,6 @@ body{
   </div>
 </div>
 
-  <div class="header-line"></div>
 </div>
   
 <!-- MENU -->
@@ -440,7 +439,7 @@ updateClock();
 // =====================
 // LANDING PASSWORD LOCK
 // =====================
-const LANDING_PASSWORD = "mredtech";   // <-- Tukar password sini
+const LANDING_PASSWORD = "mredtech";   
 const AUTH_KEY = "SE_LANDING_AUTH_V1";
 
 function showMsg(type, title, text){
